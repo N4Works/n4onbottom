@@ -79,6 +79,8 @@ describe('n4OnBottom', function() {
       element = angular.element('<ul n4-on-bottom="onBottom()" on-window-bottom="{{onWindowBottom}}"><li>Item 1</li><li>Item 2</li></ul>');
       $compile(element)($scope);
       $scope.$apply();
+
+      spyOn($timeout, 'cancel').and.callThrough();
     });
 
     it('Should call "onBottom" event on reach the bottom', function() {
@@ -90,6 +92,7 @@ describe('n4OnBottom', function() {
 
       $timeout.flush();
 
+      expect($timeout.cancel).toHaveBeenCalled();
       expect(element.scrollTop).toHaveBeenCalled();
       expect(element.innerHeight).toHaveBeenCalled();
       expect($scope.onBottom).toHaveBeenCalled();
@@ -103,6 +106,7 @@ describe('n4OnBottom', function() {
 
       $timeout.flush();
 
+      expect($timeout.cancel).toHaveBeenCalled();
       expect(element.scrollTop).toHaveBeenCalled();
       expect(element.innerHeight).toHaveBeenCalled();
       expect($scope.onBottom).not.toHaveBeenCalled();
@@ -120,6 +124,7 @@ describe('n4OnBottom', function() {
 
       $timeout.flush();
 
+      expect($timeout.cancel).toHaveBeenCalled();
       expect($($window).scrollTop).toHaveBeenCalled();
       expect($($window).height).toHaveBeenCalled();
       expect($scope.onBottom).toHaveBeenCalled();
@@ -137,6 +142,7 @@ describe('n4OnBottom', function() {
 
       $timeout.flush();
 
+      expect($timeout.cancel).toHaveBeenCalled();
       expect($($window).scrollTop).toHaveBeenCalled();
       expect($($window).height).toHaveBeenCalled();
       expect($($document).height).toHaveBeenCalled();

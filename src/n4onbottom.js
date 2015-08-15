@@ -16,21 +16,24 @@
           },
           compile: function(tElement, tAttrs) {
             return function(scope, element, attributes) {
+              var timeout;
               attributes.$observe('onWindowBottom', function(onWindow) {
                 if (/true/i.test(onWindow)) {
                   element.off('scroll');
 
                   $($window).on('scroll', function() {
+                    $timeout.cancel(timeout);
                     if (($($window).scrollTop() + $($window).height()) === $($document).height()) {
-                      $timeout(scope.onBottom);
+                      timeout = $timeout(scope.onBottom, 1000);
                     }
                   });
                 } else {
                   $($window).off('scroll');
 
                   element.on('scroll', function() {
+                    $timeout.cancel(timeout);
                     if ((element.scrollTop() + element.innerHeight()) >= this.scrollHeight) {
-                      $timeout(scope.onBottom);
+                      timeout = $timeout(scope.onBottom, 1000);
                     }
                   });
                 }
