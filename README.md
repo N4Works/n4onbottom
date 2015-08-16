@@ -4,7 +4,7 @@
 
 ## about
 
-  n4OnBottom: A simple module to call a callback when the scroll reach window bottom or an element bottom.
+  A simple module to call a callback when the scroll reach window bottom or an element bottom.
 
 ## how to install
 
@@ -20,7 +20,7 @@ bower install n4-onBottom-directive --save
 </ul>
 ```
 
-Remember to inject the dependency on module.
+Remember to inject the dependency in your module.
 
 ```
 angular.module('yourModule', ['n4OnBottom']);
